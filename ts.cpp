@@ -709,18 +709,19 @@ int ts::demuxer::demux_file(const char* name)
             }else
             {
                 fprintf(stderr,"unknown stream type in %s\n",name);
+                file.close();
                 return -1;
             }
         }
-
         int n;
         if((n=demux_ts_packet(buf)))
         {
             fprintf(stderr,"%s: invalid packet %llu (%i)\n",name,pn,n);
+            file.close();
             return -1;
         }
     }
-
+    file.close();
     return 0;
 }
 

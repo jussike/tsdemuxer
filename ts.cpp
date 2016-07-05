@@ -262,7 +262,7 @@ u_int64_t ts::demuxer::decode_pts(const char* ptr)
     return pts;
 }
 
-int ts::demuxer::demux_ts_packet(const char* ptr)
+int ts::demuxer::demux_ts_packet(const char* ptr, const char* name)
 {
     u_int32_t timecode=0;
     if(hdmv)
@@ -466,7 +466,7 @@ int ts::demuxer::demux_ts_packet(const char* ptr)
                             if(dst.length())
                                 ss.file.open(file::out,"%s%c%strack_%i.%s",dst.c_str(),os_slash,prefix.c_str(),pid,get_stream_ext(get_stream_type(ss.type)));
                             else
-                                ss.file.open(file::out,"%strack_%i.%s",prefix.c_str(),pid,get_stream_ext(get_stream_type(ss.type)));
+                                ss.file.open(file::out,"%s.%s", name, get_stream_ext(get_stream_type(ss.type)));
                         }
                     }
                 }
@@ -714,7 +714,7 @@ int ts::demuxer::demux_file(const char* name)
             }
         }
         int n;
-        if((n=demux_ts_packet(buf)))
+        if((n=demux_ts_packet(buf, name)))
         {
             fprintf(stderr,"%s: invalid packet %llu (%i)\n",name,pn,n);
             file.close();

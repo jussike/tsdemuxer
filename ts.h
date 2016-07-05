@@ -199,8 +199,7 @@ namespace ts
         const char* get_stream_ext(u_int8_t type_id);
 
         // take 188/192 bytes TS/M2TS packet
-        int demux_ts_packet(const char* ptr);
-
+        int demux_ts_packet(const char* ptr, const char* name);
         void write_timecodes(FILE* fp,u_int64_t first_pts,u_int64_t last_pts,u_int32_t frame_num,u_int32_t frame_len);
 #ifndef OLD_TIMECODES
         void write_timecodes2(FILE* fp,u_int64_t first_pts,u_int64_t last_pts,u_int32_t frame_num,u_int32_t frame_len);

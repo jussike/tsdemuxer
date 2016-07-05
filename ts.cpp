@@ -735,7 +735,7 @@ void ts::my_strptime(const char* s,tm* t)
     t->tm_isdst=1;
 }
 #endif
-
+#if 0
 int ts::demuxer::gen_timecodes(const std::string& datetime)
 {
     u_int64_t beg_pts=0;
@@ -918,4 +918,5 @@ void ts::demuxer::write_timecodes2(FILE* fp,u_int64_t first_pts,u_int64_t last_p
         }
     }
 }
+#endif
 #endif
